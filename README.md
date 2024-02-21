@@ -1,3 +1,0 @@
-## THIS IS THE README
-
-Test
