@@ -1,10 +1,23 @@
-// Create a React component as a function
-function Hello(props) {
-  return <div>Hello, {props.name}!</div>;
+// myscript.js
+function MyApp() {
+    return <h1>Hello, world!</h1>;
 }
 
-// Render the component to the root element
-ReactDOM.render(
-  <Hello name="Copilot" />,
-  document.getElementById('root')
-);
+function MyApp1() {
+    return <h1>Hello, worlds!<br /><span>Yes</span></h1>;
+}
+
+function MyButton() {
+    return (
+        <button>I'm a button</button>
+    );
+}
+
+function MyApplication() {
+    return (
+        <div>
+            <h1>Welcome to my app</h1>
+            <MyButton />
+        </div>
+    );
+}
