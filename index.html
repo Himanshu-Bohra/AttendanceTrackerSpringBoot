@@ -1,16 +1,77 @@
 <html>
 <head>
-  <title>React without npm</title>
+  <title>React Attendance Tracker</title>
   <!-- Load React Libraries -->
   <!-- Note: when deploying, replace "development.js" with "production.min.js". -->
   <script src="^7^" crossorigin></script>
   <script src="^8^" crossorigin></script>
   <!-- Load Babel Compiler -->
   <script src="^13^"></script>
+  <!-- Load Bootstrap CSS for styling -->
+  <link rel="stylesheet" href="^14^">
 </head>
 <body>
   <div id="root"></div>
-  <!-- Import your React code -->
-  <script type="text/babel" src="myScript.js"></script>
+  <script type="text/babel">
+    // Create a React component for the table row
+    function TableRow(props) {
+      // Use state to store the attendance status of each person
+      const [present, setPresent] = React.useState(props.present);
+
+      // Define a function to toggle the attendance status
+      function togglePresent() {
+        setPresent(!present);
+      }
+
+      // Return JSX code for the table row
+      return (
+        <tr>
+          <td>{props.name}</td>
+          <td>{present ? "Present" : "Absent"}</td>
+          <td>
+            <button className="btn btn-primary" onClick={togglePresent}>
+              {present ? "Mark Absent" : "Mark Present"}
+            </button>
+          </td>
+        </tr>
+      );
+    }
+
+    // Create a React component for the table
+    function Table(props) {
+      // Use props to pass the data for the table
+      const data = props.data;
+
+      // Return JSX code for the table
+      return (
+        <table className="table table-striped">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Attendance</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            {data.map((item) => (
+              <TableRow key={item.id} name={item.name} present={item.present} />
+            ))}
+          </tbody>
+        </table>
+      );
+    }
+
+    // Create some sample data for the table
+    const data = [
+      { id: 1, name: "Alice", present: true },
+      { id: 2, name: "Bob", present: false },
+      { id: 3, name: "Charlie", present: true },
+      { id: 4, name: "David", present: false },
+      { id: 5, name: "Eve", present: true },
+    ];
+
+    // Render the table component to the root element
+    ReactDOM.render(<Table data={data} />, document.getElementById("root"));
+  </script>
 </body>
 </html>
